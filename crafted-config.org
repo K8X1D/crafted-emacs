@@ -1,5 +1,5 @@
 :DOC-CONFIG:
-#+PROPERTY: header-args :mkdirp yes :comments no :tangle ~/.config/crafted-emacs/config.el
+#+PROPERTY: header-args :mkdirp yes :comments no :tangle config.el
 #+STARTUP: fold
 :END:
 
@@ -11,7 +11,7 @@
 #+END_SRC
 
 #+html: <details><summary>k8x1d-org.el</summary>
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-org.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
 ;;; k8x1d-org.el -- Org customizations -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
@@ -21,7 +21,7 @@
 #+END_SRC
 
 #+html: <details><summary>k8x1d-julia.el</summary>
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-julia.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
 ;;; k8x1d-julia.el -- Org customizations -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
@@ -31,7 +31,7 @@
 #+END_SRC
 
 #+html: <details><summary>k8x1d-R.el</summary>
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-R.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-R.el 
 ;;; k8x1d-R.el -- Org customizations -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
@@ -41,7 +41,7 @@
 #+END_SRC
 
 #+html: <details><summary>k8x1d-R.el</summary>
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-git.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
 ;;; k8x1d-git.el -- Org customizations -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
@@ -204,20 +204,20 @@ Prefer newer version for every packages
 * Custom modules
 ** k8x1d-org
 Packages
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-org.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
   (require 'crafted-org)
   (crafted-package-install-package 'org-superstar)
   (crafted-package-install-package 'evil-org)
 #+END_SRC
 
 Configurations
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-org.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
   (setq org-superstar-remove-leading-stars t)
   (setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
   (setq org-superstar-special-todo-items t)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-org.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
   (setq org-startup-indented t
         org-pretty-entities t
         org-hide-emphasis-markers t
@@ -225,7 +225,7 @@ Configurations
         org-image-actual-width '(600))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-org.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
   (global-set-key (kbd "C-c o a a") 'org-agenda)
   (global-set-key (kbd "C-c o a l") 'org-agenda-list)
   (global-set-key (kbd "C-c o a t") 'org-todo-list)
@@ -248,7 +248,7 @@ Configurations
 #+END_SRC
 
 Hooks
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-org.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
   (add-hook 'org-mode-hook 'org-superstar-mode)
   (add-hook 'org-mode-hook (lambda ()
                              (require 'evil-org)
@@ -261,7 +261,7 @@ Hooks
 
 ** k8x1d-julia
 Packages
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-julia.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
 (crafted-package-install-package 'julia-mode)
 (crafted-package-install-package 'julia-vterm)
 (crafted-package-install-package 'ob-julia-vterm)
@@ -269,12 +269,12 @@ Packages
 #+END_SRC
 
 Configurations
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-julia.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
 (eglot-jl-init)
 #+END_SRC
 
 Hooks
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-julia.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
 (add-hook 'julia-mode-hook 'julia-vterm-mode)
 (add-hook 'org-mode-hook (lambda ()
                            (add-to-list 'org-babel-load-languages '(julia-vterm . t))
@@ -284,25 +284,25 @@ Hooks
 
 ** k8x1d-R
 Packages
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-R.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-R.el 
 (crafted-package-install-package 'ess)
 #+END_SRC
 
 Hooks
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-R.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-R.el 
 (add-hook 'ess-r-mode-hook #'eglot-ensure)
 #+END_SRC
 
 ** k8x1d-git
 Packages
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-git.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
 (crafted-package-install-package 'magit)
 (crafted-package-install-package 'magit-todos)
 (crafted-package-install-package 'forge)
 #+END_SRC
 
 Hooks
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-git.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
   (add-hook 'magit-mode-hook (lambda ()
                                (magit-todos-mode)
                                (require 'forge)))
@@ -316,25 +316,25 @@ Hooks
 #+END_SRC
 
 #+html: <details><summary>k8x1d-org.el</summary>
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-org.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
 (provide 'k8x1d-org)
 ;;; k8x1d-org.el ends here
 #+END_SRC
 
 #+html: <details><summary>k8x1d-org.el</summary>
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-julia.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
 (provide 'k8x1d-julia)
 ;;; k8x1d-julia.el ends here
 #+END_SRC
 
 #+html: <details><summary>k8x1d-R.el</summary>
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-R.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-R.el 
 (provide 'k8x1d-R)
 ;;; k8x1d-R.el ends here
 #+END_SRC
 
 #+html: <details><summary>k8x1d-git.el</summary>
-#+BEGIN_SRC emacs-lisp :tangle ~/.config/crafted-emacs/custom-modules/k8x1d-git.el 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
 (provide 'k8x1d-git)
 ;;; k8x1d-git.el ends here
 #+END_SRC

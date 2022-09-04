@@ -1,0 +1,26 @@
+#+TITLE:  K8X1D Emacs configuration
+#+AUTHOR: Kevin Kaiser
+#+AUTHOR: k8x1d@proton.me
+
+
+
+
+** Description
+Own configuration file for the [[https://github.com/SystemCrafters/crafted-emacs][Crafted Emacs project]].
+
+** To deploy
+Clone crafted emacs 
+#+BEGIN_SRC sh
+git clone https://github.com/SystemCrafters/crafted-emacs ~/.config/emacs
+#+END_SRC 
+
+Tangle the configuration file
+#+BEGIN_SRC sh
+  cd /path/to/the/project
+  emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "crafted-config.org")'
+#+END_SRC 
+
+Create a symbolic link to your dot-file
+#+BEGIN_SRC sh
+  ln -s $PWD ~/.config/crafted-emacs
+#+END_SRC 
