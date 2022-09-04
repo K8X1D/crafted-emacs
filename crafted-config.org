@@ -5,9 +5,15 @@
 
 
 * Files headers
+
 #+html: <details><summary>config.el</summary>
 #+BEGIN_SRC emacs-lisp
 ;;; config.el -- Crafted Emacs user customization file -*- lexical-binding: t; -*-
+#+END_SRC
+
+#+html: <details><summary>early-config.el</summary>
+#+BEGIN_SRC emacs-lisp :tangle early-config.el
+;;; early-config.el -- Crafted Emacs user (early) customization file -*- lexical-binding: t; -*-
 #+END_SRC
 
 #+html: <details><summary>k8x1d-org.el</summary>
@@ -48,6 +54,12 @@
 
 ;; Author: Kevin Kaiser <k8x1d@oryp6>
 ;; Keywords: lisp
+#+END_SRC
+
+* Early configurations
+Prefer newer version for every packages
+#+BEGIN_SRC emacs-lisp :tangle early-config.el
+  (setq package-archive-priorities nil)
 #+END_SRC
 
 * Modules used
@@ -181,11 +193,6 @@ Follow symlink
   (setq vc-follow-symlinks t)
 #+END_SRC
 
-Prefer newer version for every packages
-#+BEGIN_SRC emacs-lisp
-  (setq package-archive-priorities nil)
-#+END_SRC
-
 * Additional packages
 ** High performance terminal
 #+BEGIN_SRC emacs-lisp 
@@ -270,7 +277,7 @@ Packages
 
 Configurations
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
-(eglot-jl-init)
+(eglot-jl-config)
 #+END_SRC
 
 Hooks
@@ -313,6 +320,12 @@ Hooks
 #+BEGIN_SRC emacs-lisp 
 (provide 'config)
 ;;; config.el ends here
+#+END_SRC
+
+#+html: <details><summary>early-config.el</summary>
+#+BEGIN_SRC emacs-lisp 
+(provide 'early-config)
+;;; early-config.el ends here
 #+END_SRC
 
 #+html: <details><summary>k8x1d-org.el</summary>

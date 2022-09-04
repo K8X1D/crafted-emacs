@@ -9,18 +9,14 @@
 Own configuration file for the [[https://github.com/SystemCrafters/crafted-emacs][Crafted Emacs project]].
 
 ** To deploy
-Clone crafted emacs 
+1. Clone crafted emacs 
 #+BEGIN_SRC sh
 git clone https://github.com/SystemCrafters/crafted-emacs ~/.config/emacs
 #+END_SRC 
 
-Tangle the configuration file
+2. Clone the configuration 
 #+BEGIN_SRC sh
-  cd /path/to/the/project
-  emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "crafted-config.org")'
+git clone https://gitlab.com/oryp6/editors_set-up/crafted-emacs.git ~/.config/crafted-emacs
 #+END_SRC 
 
-Create a symbolic link to your dot-file
-#+BEGIN_SRC sh
-  ln -s $PWD ~/.config/crafted-emacs
-#+END_SRC 
+3. Launch emacs and let it download the packages.

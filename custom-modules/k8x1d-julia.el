@@ -10,7 +10,7 @@
 (crafted-package-install-package 'ob-julia-vterm)
 (crafted-package-install-package 'eglot-jl)
 
-(eglot-jl-init)
+(eglot-jl-config)
 
 (add-hook 'julia-mode-hook 'julia-vterm-mode)
 (add-hook 'org-mode-hook (lambda ()

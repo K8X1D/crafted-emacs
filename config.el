@@ -85,8 +85,6 @@
 
 (setq vc-follow-symlinks t)
 
-(setq package-archive-priorities nil)
-
 (crafted-package-install-package 'vterm)
 
 (crafted-package-install-package 'mixed-pitch)
@@ -96,3 +94,6 @@
 
 (provide 'config)
 ;;; config.el ends here
+
+(provide 'early-config)
+;;; early-config.el ends here
