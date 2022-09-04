@@ -10,10 +10,10 @@
 (require 'crafted-project)     ; built-in alternative to projectile
 (require 'crafted-speedbar)    ; built-in file-tree
 (require 'crafted-screencast)  ; show current command and binding in modeline
-(require 'crafted-compile)     ; automatically compile some emacs lisp files
 (require 'crafted-pdf-reader)  ; pdf support
 (require 'crafted-latex)       ; latex support
 (require 'crafted-lisp)        ; lisp support
+;;(require 'crafted-compile)     ; automatically compile some emacs lisp files  TODO: repair bug
 
 (require 'k8x1d-org)           ; org-appear, clickable hyperlinks etc.
 

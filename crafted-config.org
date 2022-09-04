@@ -62,6 +62,11 @@ Prefer newer version for every packages
   (setq package-archive-priorities nil)
 #+END_SRC
 
+Remove gui elements
+#+BEGIN_SRC emacs-lisp :tangle early-config.el
+  (setq use-dialog-box nil) ;; remove gui box
+#+END_SRC
+
 * Modules used
 ** Crafted modules
 #+BEGIN_SRC emacs-lisp 
@@ -75,10 +80,10 @@ Prefer newer version for every packages
   (require 'crafted-project)     ; built-in alternative to projectile
   (require 'crafted-speedbar)    ; built-in file-tree
   (require 'crafted-screencast)  ; show current command and binding in modeline
-  (require 'crafted-compile)     ; automatically compile some emacs lisp files
   (require 'crafted-pdf-reader)  ; pdf support
   (require 'crafted-latex)       ; latex support
   (require 'crafted-lisp)        ; lisp support
+  ;;(require 'crafted-compile)     ; automatically compile some emacs lisp files  TODO: repair bug
 #+END_SRC
 
 ** Custom crafted modules
@@ -277,7 +282,7 @@ Packages
 
 Configurations
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
-(eglot-jl-config)
+(eglot-jl-init)
 #+END_SRC
 
 Hooks
