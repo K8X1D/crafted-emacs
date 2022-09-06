@@ -183,10 +183,11 @@ Centralize backup file to $HOME/.saves
 
 Julia idiosyncrasies
 #+BEGIN_SRC emacs-lisp 
-  (setq julia-vterm-repl-program (concat (getenv "HOME") "/.nix-profile/bin/julia -t 4"))
-  (setq eglot-jl-default-environment "~/.julia/environments/v1.7")
-  (setq eglot-connect-timeout 60)
-  (setq eglot-jl-julia-command (concat (getenv "HOME") "/.nix-profile/bin/julia"))
+(setq julia-vterm-repl-program (concat (getenv "HOME") "/.nix-profile/bin/julia -t 4"))
+(setq eglot-jl-default-environment "~/.julia/environments/v1.7")
+;; (setq eglot-connect-timeout 60)
+(setq eglot-connect-timeout 600)
+(setq eglot-jl-julia-command (concat (getenv "HOME") "/.nix-profile/bin/julia"))
 #+END_SRC
 
 Tab-bar
@@ -215,6 +216,22 @@ Group under a wheel minor mode
   (crafted-package-install-package 'minions)
   (add-hook 'after-init-hook 'minions-mode)
 #+END_SRC
+
+Modeline adjustment
+#+BEGIN_SRC emacs-lisp
+(setq doom-modeline-height 10) ; optional
+(setq doom-modeline-bar-width 4)
+(custom-set-faces
+  '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
+  '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
+  '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
+#+END_SRC
+
+Password-store interaction
+#+BEGIN_SRC emacs-lisp
+  (crafted-package-install-package 'pass)
+#+END_SRC
+
 
 * Additional packages
 ** High performance terminal

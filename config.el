@@ -73,10 +73,11 @@
 
   (setq backup-directory-alist `(("." . "~/.saves")))
 
-  (setq julia-vterm-repl-program (concat (getenv "HOME") "/.nix-profile/bin/julia -t 4"))
-  (setq eglot-jl-default-environment "~/.julia/environments/v1.7")
-  (setq eglot-connect-timeout 60)
-  (setq eglot-jl-julia-command (concat (getenv "HOME") "/.nix-profile/bin/julia"))
+(setq julia-vterm-repl-program (concat (getenv "HOME") "/.nix-profile/bin/julia -t 4"))
+(setq eglot-jl-default-environment "~/.julia/environments/v1.7")
+;; (setq eglot-connect-timeout 60)
+(setq eglot-connect-timeout 600)
+(setq eglot-jl-julia-command (concat (getenv "HOME") "/.nix-profile/bin/julia"))
 
   (setq tab-bar-show nil)
   (setq tab-bar-new-tab-choice "*scratch*")
@@ -89,6 +90,15 @@
 
   (crafted-package-install-package 'minions)
   (add-hook 'after-init-hook 'minions-mode)
+
+(setq doom-modeline-height 10) ; optional
+(setq doom-modeline-bar-width 4)
+(custom-set-faces
+  '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
+  '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
+  '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
+
+  (crafted-package-install-package 'pass)
 
   (crafted-package-install-package 'vterm)
   (global-set-key (kbd "C-c t") 'vterm-other-window)
