@@ -27,10 +27,10 @@
 (add-hook 'emacs-startup-hook
           (lambda ()
             (custom-set-faces
-             `(default ((t (:font "JuliaMono 16"))))
+             `(default ((t (:font "FiraCode 16"))))
              `(fixed-pitch ((t (:inherit (default)))))
              `(fixed-pitch-serif ((t (:inherit (default)))))
-             `(variable-pitch ((t (:font "DejaVu Sans 16")))))))
+             `(variable-pitch ((t (:font "Overpass 16")))))))
 
   (setq inhibit-x-resources t) ;; ignore xressources
   (crafted-package-install-package 'doom-themes)
@@ -100,12 +100,13 @@
 
   (crafted-package-install-package 'pass)
 
-  (crafted-package-install-package 'vterm)
-  (global-set-key (kbd "C-c t") 'vterm-other-window)
-  (defun kk/new-vterm-instance ()
-    (interactive)
-    (vterm t))
-  (global-set-key (kbd "C-c T") 'kk/new-vterm-instance)
+(crafted-package-install-package 'vterm)
+(global-set-key (kbd "C-c t") 'vterm-other-window)
+(defun kk/new-vterm-instance ()
+  (interactive)
+  (vterm t))
+(global-set-key (kbd "C-c T") 'kk/new-vterm-instance)
+(add-hook 'vterm-mode-hook 'visual-line-mode)
 
   (crafted-package-install-package 'mixed-pitch)
   (add-hook 'text-mode-hook 'mixed-pitch-mode)

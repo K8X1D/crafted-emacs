@@ -6,8 +6,9 @@
 ;; Keywords: lisp
 
   (require 'crafted-org)
-  (crafted-package-install-package 'org-superstar)
-  (crafted-package-install-package 'evil-org)
+  (crafted-package-install-package 'org-superstar) ;; bullets customization
+  (crafted-package-install-package 'evil-org) ;; evil support for org-agenda
+  (crafted-package-install-package 'toc-org) ;; Table of content management
 
   (setq org-superstar-remove-leading-stars t)
   (setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
@@ -47,6 +48,7 @@
                                     (require 'evil-org-agenda)
                                     (evil-org-agenda-set-keys)))
   (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'org-mode-hook 'toc-org-mode)
 
 (provide 'k8x1d-org)
 ;;; k8x1d-org.el ends here
