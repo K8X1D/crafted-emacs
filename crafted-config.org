@@ -280,8 +280,9 @@ Do not remove initial white space on export
 Packages
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
   (require 'crafted-org)
-  (crafted-package-install-package 'org-superstar)
-  (crafted-package-install-package 'evil-org)
+  (crafted-package-install-package 'org-superstar) ;; bullets customization
+  (crafted-package-install-package 'evil-org) ;; evil support for org-agenda
+  (crafted-package-install-package 'toc-org) ;; Table of content management
 #+END_SRC
 
 Configurations
@@ -331,6 +332,7 @@ Hooks
                                     (require 'evil-org-agenda)
                                     (evil-org-agenda-set-keys)))
   (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'org-mode-hook 'toc-org-mode)
 #+END_SRC
 
 ** k8x1d-python
