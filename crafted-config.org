@@ -10,11 +10,13 @@
 #+BEGIN_SRC emacs-lisp
 ;;; config.el -- Crafted Emacs user customization file -*- lexical-binding: t; -*-
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>early-config.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle early-config.el
 ;;; early-config.el -- Crafted Emacs user (early) customization file -*- lexical-binding: t; -*-
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>k8x1d-org.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
@@ -25,6 +27,7 @@
 ;; Author: Kevin Kaiser <k8x1d@oryp6>
 ;; Keywords: lisp
 #+END_SRC
+#+html: </details>
 
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
 ;;; k8x1d-python.el -- Org customizations -*- lexical-binding: t; -*-
@@ -34,6 +37,7 @@
 ;; Author: Kevin Kaiser <k8x1d@oryp6>
 ;; Keywords: lisp
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>k8x1d-julia.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
@@ -44,6 +48,7 @@
 ;; Author: Kevin Kaiser <k8x1d@oryp6>
 ;; Keywords: lisp
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>k8x1d-R.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-R.el 
@@ -54,6 +59,7 @@
 ;; Author: Kevin Kaiser <k8x1d@oryp6>
 ;; Keywords: lisp
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>k8x1d-R.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
@@ -64,6 +70,7 @@
 ;; Author: Kevin Kaiser <k8x1d@oryp6>
 ;; Keywords: lisp
 #+END_SRC
+#+html: </details>
 
 * Early configurations
 Prefer newer version for every packages
@@ -396,30 +403,35 @@ Hooks
 (provide 'config)
 ;;; config.el ends here
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>early-config.el</summary>
 #+BEGIN_SRC emacs-lisp 
 (provide 'early-config)
 ;;; early-config.el ends here
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>k8x1d-org.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
 (provide 'k8x1d-org)
 ;;; k8x1d-org.el ends here
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>k8x1d-python.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
 (provide 'k8x1d-python)
 ;;; k8x1d-python.el ends here
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>k8x1d-org.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
 (provide 'k8x1d-julia)
 ;;; k8x1d-julia.el ends here
 #+END_SRC
+#+html: </details>
 
 #+html: <details><summary>k8x1d-R.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-R.el 
@@ -432,3 +444,4 @@ Hooks
 (provide 'k8x1d-git)
 ;;; k8x1d-git.el ends here
 #+END_SRC
+#+html: </details>
