@@ -26,6 +26,15 @@
 ;; Keywords: lisp
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
+;;; k8x1d-python.el -- Org customizations -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2022  Kevin Kaiser
+
+;; Author: Kevin Kaiser <k8x1d@oryp6>
+;; Keywords: lisp
+#+END_SRC
+
 #+html: <details><summary>k8x1d-julia.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
 ;;; k8x1d-julia.el -- Org customizations -*- lexical-binding: t; -*-
@@ -83,6 +92,7 @@ Remove gui elements
   (require 'crafted-pdf-reader)  ; pdf support
   (require 'crafted-latex)       ; latex support
   (require 'crafted-lisp)        ; lisp support
+  ;;(require 'crafted-python)      ; python support
   ;;(require 'crafted-compile)     ; automatically compile some emacs lisp files  TODO: repair bug
 #+END_SRC
 
@@ -91,6 +101,9 @@ Remove gui elements
   (require 'k8x1d-org)           ; org-appear, clickable hyperlinks etc.
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp 
+  (require 'k8x1d-python)           ; org-appear, clickable hyperlinks etc.
+#+END_SRC
 ** Custom modules
 #+BEGIN_SRC emacs-lisp 
   (require 'k8x1d-julia)         ; julia support
@@ -105,7 +118,7 @@ Variable pitch
 (add-hook 'emacs-startup-hook
           (lambda ()
             (custom-set-faces
-             `(default ((t (:font "DejaVu Sans Mono 16"))))
+             `(default ((t (:font "JuliaMono 16"))))
              `(fixed-pitch ((t (:inherit (default)))))
              `(fixed-pitch-serif ((t (:inherit (default)))))
              `(variable-pitch ((t (:font "DejaVu Sans 16")))))))
@@ -172,7 +185,6 @@ Julia idiosyncrasies
 #+BEGIN_SRC emacs-lisp 
   (setq julia-vterm-repl-program (concat (getenv "HOME") "/.nix-profile/bin/julia -t 4"))
   (setq eglot-jl-default-environment "~/.julia/environments/v1.7")
-  (setq eglot-jl-language-server-project (concat eglot-jl-default-environment "/eglot-jl"))
   (setq eglot-connect-timeout 60)
   (setq eglot-jl-julia-command (concat (getenv "HOME") "/.nix-profile/bin/julia"))
 #+END_SRC
@@ -198,10 +210,21 @@ Follow symlink
   (setq vc-follow-symlinks t)
 #+END_SRC
 
+Group under a wheel minor mode
+#+BEGIN_SRC emacs-lisp
+  (crafted-package-install-package 'minions)
+  (add-hook 'after-init-hook 'minions-mode)
+#+END_SRC
+
 * Additional packages
 ** High performance terminal
 #+BEGIN_SRC emacs-lisp 
-(crafted-package-install-package 'vterm)
+  (crafted-package-install-package 'vterm)
+  (global-set-key (kbd "C-c t") 'vterm-other-window)
+  (defun kk/new-vterm-instance ()
+    (interactive)
+    (vterm t))
+  (global-set-key (kbd "C-c T") 'kk/new-vterm-instance)
 #+END_SRC
 ** Mixed mode
 #+BEGIN_SRC emacs-lisp 
@@ -211,6 +234,21 @@ Follow symlink
 ** CSV mode
 #+BEGIN_SRC emacs-lisp 
   (crafted-package-install-package 'csv-mode)
+#+END_SRC
+
+Don't ask for evaluation when using babel
+#+begin_src emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+natural tab in src block
+#+begin_src emacs-lisp
+(setq org-src-tab-acts-natively t)
+#+END_SRC
+
+Do not remove initial white space on export
+#+begin_src emacs-lisp
+(setq org-src-preserve-indentation t)
 #+END_SRC
 
 * Custom modules
@@ -269,6 +307,21 @@ Hooks
                                     (require 'evil-org-agenda)
                                     (evil-org-agenda-set-keys)))
   (add-hook 'org-mode-hook 'evil-org-mode)
+#+END_SRC
+
+** k8x1d-python
+Packages
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
+  (require 'crafted-python)
+#+END_SRC
+
+Configurations
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
+  (setq python-shell-interpreter (concat (getenv "HOME") "/.guix-extra-profiles/code/code/bin/python3.9"))
+  (setq org-babel-python-command (concat (getenv "HOME") "/.guix-extra-profiles/code/code/bin/python3.9"))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)))
 #+END_SRC
 
 ** k8x1d-julia
@@ -337,6 +390,12 @@ Hooks
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
 (provide 'k8x1d-org)
 ;;; k8x1d-org.el ends here
+#+END_SRC
+
+#+html: <details><summary>k8x1d-python.el</summary>
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
+(provide 'k8x1d-python)
+;;; k8x1d-python.el ends here
 #+END_SRC
 
 #+html: <details><summary>k8x1d-org.el</summary>
