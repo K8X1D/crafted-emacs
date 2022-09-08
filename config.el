@@ -27,10 +27,10 @@
 (add-hook 'emacs-startup-hook
           (lambda ()
             (custom-set-faces
-             `(default ((t (:font "FiraCode 16"))))
+             `(default ((t (:font "DejaVu Sans Mono 16"))))
              `(fixed-pitch ((t (:inherit (default)))))
              `(fixed-pitch-serif ((t (:inherit (default)))))
-             `(variable-pitch ((t (:font "Overpass 16")))))))
+             `(variable-pitch ((t (:font "DejaVu Sans 16")))))))
 
   (setq inhibit-x-resources t) ;; ignore xressources
   (crafted-package-install-package 'doom-themes)
@@ -71,7 +71,17 @@
   (setq geiser-default-implementation 'guile)
   (setq scheme-program-name "guile")
 
-  (setq backup-directory-alist `(("." . "~/.saves")))
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.saves/"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
+
+(setq auto-save-file-name-transforms
+  `((".*" "~/.cache/emacs/saves/" t))))
 
 (setq julia-vterm-repl-program (concat (getenv "HOME") "/.nix-profile/bin/julia -t 4"))
 (setq eglot-jl-default-environment "~/.julia/environments/v1.7")
@@ -99,6 +109,11 @@
   '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
 
   (crafted-package-install-package 'pass)
+
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+(setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+(add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
 
 (crafted-package-install-package 'vterm)
 (global-set-key (kbd "C-c t") 'vterm-other-window)

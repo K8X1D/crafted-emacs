@@ -125,10 +125,10 @@ Variable pitch
 (add-hook 'emacs-startup-hook
           (lambda ()
             (custom-set-faces
-             `(default ((t (:font "FiraCode 16"))))
+             `(default ((t (:font "DejaVu Sans Mono 16"))))
              `(fixed-pitch ((t (:inherit (default)))))
              `(fixed-pitch-serif ((t (:inherit (default)))))
-             `(variable-pitch ((t (:font "Overpass 16")))))))
+             `(variable-pitch ((t (:font "DejaVu Sans 16")))))))
 
 #+END_SRC
 
@@ -183,10 +183,24 @@ Scheme specifications
   (setq scheme-program-name "guile")
 #+END_SRC
 
-Centralize backup file to $HOME/.saves
+Centralize backup files to $HOME/.saves
 #+BEGIN_SRC emacs-lisp 
-  (setq backup-directory-alist `(("." . "~/.saves")))
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.saves/"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
 #+END_SRC
+
+Centralize autosave files to $HOME/.saves
+#+BEGIN_SRC emacs-lisp 
+(setq auto-save-file-name-transforms
+  `((".*" "~/.cache/emacs/saves/" t))))
+#+END_SRC
+
 
 Julia idiosyncrasies
 #+BEGIN_SRC emacs-lisp 
@@ -240,9 +254,16 @@ Password-store interaction
 #+END_SRC
 
 Line-number
-#+begin_src elisp :tangle ~/.emacs.d/lisp/k8x1d-ui.el
+#+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-#+end_src
+#+END_SRC
+
+Pdf support
+#+BEGIN_SRC emacs-lisp
+(setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+(add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
+#+END_SRC
+
 
 * Additional packages
 ** High performance terminal
@@ -390,6 +411,21 @@ Hooks
 #+END_SRC
 
 ** k8x1d-git
+Packages
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
+(crafted-package-install-package 'magit)
+(crafted-package-install-package 'magit-todos)
+(crafted-package-install-package 'forge)
+#+END_SRC
+
+Hooks
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
+  (add-hook 'magit-mode-hook (lambda ()
+                               (magit-todos-mode)
+                               (require 'forge)))
+#+END_SRC
+
+** k8x1d-ivy
 Packages
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
 (crafted-package-install-package 'magit)
