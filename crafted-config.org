@@ -24,7 +24,7 @@
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
-;; Author: Kevin Kaiser <k8x1d@oryp6>
+;; Author: Kevin Kaiser <k8x1d@proton.me>
 ;; Keywords: lisp
 #+END_SRC
 #+html: </details>
@@ -34,7 +34,7 @@
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
-;; Author: Kevin Kaiser <k8x1d@oryp6>
+;; Author: Kevin Kaiser <k8x1d@proton.me>
 ;; Keywords: lisp
 #+END_SRC
 #+html: </details>
@@ -45,7 +45,7 @@
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
-;; Author: Kevin Kaiser <k8x1d@oryp6>
+;; Author: Kevin Kaiser <k8x1d@proton.me>
 ;; Keywords: lisp
 #+END_SRC
 #+html: </details>
@@ -56,7 +56,7 @@
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
-;; Author: Kevin Kaiser <k8x1d@oryp6>
+;; Author: Kevin Kaiser <k8x1d@proton.me>
 ;; Keywords: lisp
 #+END_SRC
 #+html: </details>
@@ -67,7 +67,29 @@
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
-;; Author: Kevin Kaiser <k8x1d@oryp6>
+;; Author: Kevin Kaiser <k8x1d@proton.me>
+;; Keywords: lisp
+#+END_SRC
+#+html: </details>
+
+#+html: <details><summary>k8x1d-ivy.el</summary>
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-ivy.el 
+;;; k8x1d-ivy.el -- Ivy completion -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2022  Kevin Kaiser
+
+;; Author: Kevin Kaiser <k8x1d@proton.me>
+;; Keywords: lisp
+#+END_SRC
+#+html: </details>
+
+#+html: <details><summary>k8x1d-language-tool.el</summary>
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-language-tool.el 
+;;; k8x1d-language-tool.el -- Ivy completion -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2022  Kevin Kaiser
+
+;; Author: Kevin Kaiser <k8x1d@proton.me>
 ;; Keywords: lisp
 #+END_SRC
 #+html: </details>
@@ -83,6 +105,13 @@ Remove gui elements
   (setq use-dialog-box nil) ;; remove gui box
 #+END_SRC
 
+Use straight.el instead of package.el
+#+BEGIN_SRC emacs-lisp :tangle ./early-config.el
+(setq package-enable-at-startup nil)
+(setq crafted-package-system 'straight)
+(crafted-package-bootstrap crafted-package-system)
+#+END_SRC
+
 * Modules used
 ** Crafted modules
 #+BEGIN_SRC emacs-lisp 
@@ -96,7 +125,7 @@ Remove gui elements
   (require 'crafted-project)     ; built-in alternative to projectile
   (require 'crafted-speedbar)    ; built-in file-tree
   (require 'crafted-screencast)  ; show current command and binding in modeline
-  (require 'crafted-pdf-reader)  ; pdf support
+  ;;(require 'crafted-pdf-reader)  ; pdf support
   (require 'crafted-latex)       ; latex support
   (require 'crafted-lisp)        ; lisp support
   ;;(require 'crafted-python)      ; python support
@@ -116,6 +145,7 @@ Remove gui elements
   (require 'k8x1d-julia)         ; julia support
   (require 'k8x1d-R)             ; R support
   (require 'k8x1d-git)           ; git support
+  (require 'k8x1d-ivy)           ; ivy completion support
 #+END_SRC
 
 * GUI
@@ -198,7 +228,7 @@ Centralize backup files to $HOME/.saves
 Centralize autosave files to $HOME/.saves
 #+BEGIN_SRC emacs-lisp 
 (setq auto-save-file-name-transforms
-  `((".*" "~/.cache/emacs/saves/" t))))
+  `((".*" "~/.cache/emacs/saves/" t)))
 #+END_SRC
 
 
@@ -261,9 +291,7 @@ Line-number
 Pdf support
 #+BEGIN_SRC emacs-lisp
 (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-(add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
 #+END_SRC
-
 
 * Additional packages
 ** High performance terminal
@@ -287,18 +315,35 @@ Pdf support
 #+END_SRC
 
 Don't ask for evaluation when using babel
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
 natural tab in src block
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq org-src-tab-acts-natively t)
 #+END_SRC
 
 Do not remove initial white space on export
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq org-src-preserve-indentation t)
+#+END_SRC
+
+
+** Pdf-tools
+Install package
+#+BEGIN_SRC emacs-lisp
+(crafted-package-install-package 'pdf-tools)
+#+END_SRC
+
+Lazy load pdf-tools
+#+BEGIN_SRC emacs-lisp
+(pdf-loader-install)
+#+END_SRC
+
+Start in dark mode
+#+BEGIN_SRC emacs-lisp
+(add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
 #+END_SRC
 
 * Custom modules
@@ -427,18 +472,67 @@ Hooks
 
 ** k8x1d-ivy
 Packages
-#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
-(crafted-package-install-package 'magit)
-(crafted-package-install-package 'magit-todos)
-(crafted-package-install-package 'forge)
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-ivy.el 
+(crafted-package-install-package 'ivy)
+(crafted-package-install-package 'counsel)
+(crafted-package-install-package 'swiper)
+#+END_SRC
+
+Configuration
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-ivy.el 
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+;; enable this if you want `swiper' to use it
+;; (setq search-default-mode #'char-fold-to-regexp)
+;;(global-set-key "\C-s" 'swiper)
+;;(global-set-key (kbd "C-c C-r") 'ivy-resume)
+;;(global-set-key (kbd "<f6>") 'ivy-resume)
+;;(global-set-key (kbd "M-x") 'counsel-M-x)
+;;(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;;(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+;;(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+;;(global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+;;(global-set-key (kbd "<f1> l") 'counsel-find-library)
+;;(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+;;(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+;;(global-set-key (kbd "C-c g") 'counsel-git)
+;;(global-set-key (kbd "C-c j") 'counsel-git-grep)
+;;(global-set-key (kbd "C-c k") 'counsel-ag)
+;;(global-set-key (kbd "C-x l") 'counsel-locate)
+;;(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+;;(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 #+END_SRC
 
 Hooks
-#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
-  (add-hook 'magit-mode-hook (lambda ()
-                               (magit-todos-mode)
-                               (require 'forge)))
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-ivy.el 
+(add-hook 'after-init-hook 'ivy-mode)
+(add-hook 'after-init-hook 'counsel-mode)
 #+END_SRC
+
+** k8x1d-language-tool
+Packages
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-language-tool.el 
+(straight-use-package '(eglot-ltex :type git :host github :repo "emacs-languagetool/eglot-ltex"))
+#+END_SRC
+
+Configuration
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-language-tool.el 
+(setq eglot-languagetool-server-path "~/Documents/Logiciels/editors_set-up/ltex-ls-15.2.0")
+#+END_SRC
+
+Hooks
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-language-tool.el 
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (require 'eglot-ltex)
+            (call-interactively #'eglot)))
+
+(defun kk/start-ltex ()
+  (interactive)
+  (require 'eglot-ltex)
+  (call-interactively #'eglot))
+#+END_SRC
+
 
 * Files footers
 #+html: <details><summary>config.el</summary>
@@ -486,5 +580,19 @@ Hooks
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
 (provide 'k8x1d-git)
 ;;; k8x1d-git.el ends here
+#+END_SRC
+#+html: </details>
+
+#+html: <details><summary>k8x1d-ivy.el</summary>
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-ivy.el 
+(provide 'k8x1d-ivy)
+;;; k8x1d-ivy.el ends here
+#+END_SRC
+#+html: </details>
+
+#+html: <details><summary>k8x1d-language-tool.el</summary>
+#+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-language-tool.el 
+(provide 'k8x1d-language-tool)
+;;; k8x1d-language-tool.el ends here
 #+END_SRC
 #+html: </details>
