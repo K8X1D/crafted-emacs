@@ -9,9 +9,9 @@
 (crafted-package-install-package 'magit-todos)
 (crafted-package-install-package 'forge)
 
-  (add-hook 'magit-mode-hook (lambda ()
-                               (magit-todos-mode)
-                               (require 'forge)))
+(add-hook 'magit-mode-hook (lambda ()
+                             (magit-todos-mode)
+                             (require 'forge)))
 
 (provide 'k8x1d-git)
 ;;; k8x1d-git.el ends here
