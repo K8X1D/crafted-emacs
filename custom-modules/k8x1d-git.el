@@ -2,16 +2,8 @@
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
-;; Author: Kevin Kaiser <k8x1d@oryp6>
+;; Author: Kevin Kaiser <k8x1d@proton.me>
 ;; Keywords: lisp
-
-(crafted-package-install-package 'magit)
-(crafted-package-install-package 'magit-todos)
-(crafted-package-install-package 'forge)
-
-  (add-hook 'magit-mode-hook (lambda ()
-                               (magit-todos-mode)
-                               (require 'forge)))
 
 (crafted-package-install-package 'magit)
 (crafted-package-install-package 'magit-todos)

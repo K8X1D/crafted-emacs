@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
-;; Author: Kevin Kaiser <k8x1d@oryp6>
+;; Author: Kevin Kaiser <k8x1d@proton.me>
 ;; Keywords: lisp
 
 (crafted-package-install-package 'ess)
