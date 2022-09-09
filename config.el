@@ -24,6 +24,7 @@
   (require 'k8x1d-R)             ; R support
   (require 'k8x1d-git)           ; git support
   (require 'k8x1d-ivy)           ; ivy completion support
+  (require 'k8x1d-language-tool) ; language-tool support
 
 (add-hook 'emacs-startup-hook
           (lambda ()
@@ -108,8 +109,6 @@
   '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
   '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
   '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
-
-  (crafted-package-install-package 'pass)
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 

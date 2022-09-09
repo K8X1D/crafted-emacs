@@ -8,6 +8,7 @@
 (crafted-package-install-package 'ivy)
 (crafted-package-install-package 'counsel)
 (crafted-package-install-package 'swiper)
+(crafted-package-install-package 'ivy-pass)
 
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)

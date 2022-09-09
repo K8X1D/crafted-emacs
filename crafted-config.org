@@ -146,6 +146,7 @@ Use straight.el instead of package.el
   (require 'k8x1d-R)             ; R support
   (require 'k8x1d-git)           ; git support
   (require 'k8x1d-ivy)           ; ivy completion support
+  (require 'k8x1d-language-tool) ; language-tool support
 #+END_SRC
 
 * GUI
@@ -276,11 +277,6 @@ Modeline adjustment
   '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
   '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
   '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
-#+END_SRC
-
-Password-store interaction
-#+BEGIN_SRC emacs-lisp
-  (crafted-package-install-package 'pass)
 #+END_SRC
 
 Line-number
@@ -476,6 +472,9 @@ Packages
 (crafted-package-install-package 'ivy)
 (crafted-package-install-package 'counsel)
 (crafted-package-install-package 'swiper)
+(crafted-package-install-package 'ivy-pass)
+#+END_SRC
+
 #+END_SRC
 
 Configuration
