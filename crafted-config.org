@@ -97,12 +97,12 @@
 * Early configurations
 Prefer newer version for every packages
 #+BEGIN_SRC emacs-lisp :tangle early-config.el
-  (setq package-archive-priorities nil)
+(setq package-archive-priorities nil)
 #+END_SRC
 
 Remove gui elements
 #+BEGIN_SRC emacs-lisp :tangle early-config.el
-  (setq use-dialog-box nil) ;; remove gui box
+(setq use-dialog-box nil) ;; remove gui box
 #+END_SRC
 
 Use straight.el instead of package.el
@@ -115,38 +115,38 @@ Use straight.el instead of package.el
 * Modules used
 ** Crafted modules
 #+BEGIN_SRC emacs-lisp 
-  (require 'crafted-defaults)    ; Sensible default settings for Emacs
-  (require 'crafted-updates)     ; Tools to upgrade Crafted Emacs
-  (require 'crafted-completion)  ; selection framework based on `vertico`
-  (require 'crafted-ui)          ; Better UI experience (modeline etc.)
-  (require 'crafted-windows)     ; Window management configuration
-  (require 'crafted-editing)     ; Whitspace trimming, auto parens etc.
-  (require 'crafted-evil)        ; An `evil-mode` configuration
-  (require 'crafted-project)     ; built-in alternative to projectile
-  (require 'crafted-speedbar)    ; built-in file-tree
-  (require 'crafted-screencast)  ; show current command and binding in modeline
-  ;;(require 'crafted-pdf-reader)  ; pdf support
-  (require 'crafted-latex)       ; latex support
-  (require 'crafted-lisp)        ; lisp support
-  ;;(require 'crafted-python)      ; python support
-  ;;(require 'crafted-compile)     ; automatically compile some emacs lisp files  TODO: repair bug
+(require 'crafted-defaults)    ; Sensible default settings for Emacs
+(require 'crafted-updates)     ; Tools to upgrade Crafted Emacs
+(require 'crafted-completion)  ; selection framework based on `vertico`
+(require 'crafted-ui)          ; Better UI experience (modeline etc.)
+(require 'crafted-windows)     ; Window management configuration
+(require 'crafted-editing)     ; Whitspace trimming, auto parens etc.
+(require 'crafted-evil)        ; An `evil-mode` configuration
+(require 'crafted-project)     ; built-in alternative to projectile
+(require 'crafted-speedbar)    ; built-in file-tree
+(require 'crafted-screencast)  ; show current command and binding in modeline
+;;(require 'crafted-pdf-reader)  ; pdf support
+(require 'crafted-latex)       ; latex support
+(require 'crafted-lisp)        ; lisp support
+;;(require 'crafted-python)      ; python support
+;;(require 'crafted-compile)     ; automatically compile some emacs lisp files  TODO: repair bug
 #+END_SRC
 
 ** Custom crafted modules
 #+BEGIN_SRC emacs-lisp 
-  (require 'k8x1d-org)           ; org-appear, clickable hyperlinks etc.
+(require 'k8x1d-org)           ; org-appear, clickable hyperlinks etc.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp 
-  (require 'k8x1d-python)           ; org-appear, clickable hyperlinks etc.
+(require 'k8x1d-python)           ; org-appear, clickable hyperlinks etc.
 #+END_SRC
 ** Custom modules
 #+BEGIN_SRC emacs-lisp 
-  (require 'k8x1d-julia)         ; julia support
-  (require 'k8x1d-R)             ; R support
-  (require 'k8x1d-git)           ; git support
-  (require 'k8x1d-ivy)           ; ivy completion support
-  (require 'k8x1d-language-tool) ; language-tool support
+(require 'k8x1d-julia)         ; julia support
+(require 'k8x1d-R)             ; R support
+(require 'k8x1d-git)           ; git support
+(require 'k8x1d-ivy)           ; ivy completion support
+(require 'k8x1d-language-tool) ; language-tool support
 #+END_SRC
 
 * GUI
@@ -160,19 +160,18 @@ Variable pitch
              `(fixed-pitch ((t (:inherit (default)))))
              `(fixed-pitch-serif ((t (:inherit (default)))))
              `(variable-pitch ((t (:font "DejaVu Sans 16")))))))
-
 #+END_SRC
 
 Theme
 #+BEGIN_SRC emacs-lisp 
-  (setq inhibit-x-resources t) ;; ignore xressources
-  (crafted-package-install-package 'doom-themes)
-  (progn
-    (disable-theme 'deeper-blue)          ; first turn off the deeper-blue theme
-    (load-theme 'doom-gruvbox t))       ; load the doom-gruvbox theme
-  ;;(progn
-  ;;  (disable-theme 'deeper-blue)          ; first turn off the deeper-blue theme
-  ;;  (load-theme 'modus-vivendi t))       ; load the doom-palenight theme
+(setq inhibit-x-resources t) ;; ignore xressources
+(crafted-package-install-package 'doom-themes)
+(progn
+  (disable-theme 'deeper-blue)          ; first turn off the deeper-blue theme
+  (load-theme 'doom-gruvbox t))       ; load the doom-gruvbox theme
+;;(progn
+;;  (disable-theme 'deeper-blue)          ; first turn off the deeper-blue theme
+;;  (load-theme 'modus-vivendi t))       ; load the doom-palenight theme
 #+END_SRC
 
 Start-up message
@@ -182,54 +181,54 @@ Start-up message
 
 Transparency
 #+BEGIN_SRC emacs-lisp
-  (unless (featurep 'pgtk)
-    (set-frame-parameter (selected-frame) 'alpha '(85 . 85))
-    (add-to-list 'default-frame-alist '(alpha . (85 . 85)))
-    (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(unless (featurep 'pgtk)
+  (set-frame-parameter (selected-frame) 'alpha '(85 . 85))
+  (add-to-list 'default-frame-alist '(alpha . (85 . 85)))
+  (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-    ;; ;; Set transparency of emacs
+  ;; ;; Set transparency of emacs
+  (defun kk/transparency (value)
+    "Sets the transparency of the frame window. 0=transparent/100=opaque"
+    (interactive "nTransparency Value 0 - 100 opaque:")
+    (set-frame-parameter (selected-frame) 'alpha value)))
+
+;; For emacs pgtk >= 29
+(when (featurep 'pgtk)
+  (if (version< emacs-version "29")
+      ;; initial transparency
+      (set-frame-parameter nil 'alpha-background 100)
+    (add-to-list 'default-frame-alist '(alpha-background . 100))
+
+    ;; function to change transparency
     (defun kk/transparency (value)
       "Sets the transparency of the frame window. 0=transparent/100=opaque"
       (interactive "nTransparency Value 0 - 100 opaque:")
-      (set-frame-parameter (selected-frame) 'alpha value)))
-
-  ;; For emacs pgtk >= 29
-  (when (featurep 'pgtk)
-    (if (version< emacs-version "29")
-        ;; initial transparency
-        (set-frame-parameter nil 'alpha-background 100)
-      (add-to-list 'default-frame-alist '(alpha-background . 100))
-
-      ;; function to change transparency
-      (defun kk/transparency (value)
-        "Sets the transparency of the frame window. 0=transparent/100=opaque"
-        (interactive "nTransparency Value 0 - 100 opaque:")
-        (set-frame-parameter (selected-frame) 'alpha-background value))))
+      (set-frame-parameter (selected-frame) 'alpha-background value))))
 #+END_SRC
 
 Scheme specifications
 #+BEGIN_SRC emacs-lisp
-  (setq geiser-default-implementation 'guile)
-  (setq scheme-program-name "guile")
+(setq geiser-default-implementation 'guile)
+(setq scheme-program-name "guile")
 #+END_SRC
 
 Centralize backup files to $HOME/.saves
 #+BEGIN_SRC emacs-lisp 
 (setq
-   backup-by-copying t      ; don't clobber symlinks
-   backup-directory-alist
-    '(("." . "~/.saves/"))    ; don't litter my fs tree
-   delete-old-versions t
-   kept-new-versions 6
-   kept-old-versions 2
-   version-control t)       ; use versioned backups
+ backup-by-copying t      ; don't clobber symlinks
+ backup-directory-alist
+ '(("." . "~/.saves/"))    ; don't litter my fs tree
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t)       ; use versioned backups
 #+END_SRC
 
 Centralize autosave files to $HOME/.saves
 #+BEGIN_SRC emacs-lisp 
 (setq auto-save-file-name-transforms
-  `((".*" "~/.cache/emacs/saves/" t)))
+      `((".*" "~/.cache/emacs/saves/" t)))
 #+END_SRC
 
 
@@ -244,29 +243,29 @@ Julia idiosyncrasies
 
 Tab-bar
 #+BEGIN_SRC emacs-lisp 
-  (setq tab-bar-show nil)
-  (setq tab-bar-new-tab-choice "*scratch*")
+(setq tab-bar-show nil)
+(setq tab-bar-new-tab-choice "*scratch*")
 #+END_SRC
 
 Change all prompts to y or n
 #+begin_src emacs-lisp
-  (fset 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
 Automatic visual mode for text
 #+begin_src emacs-lisp
-  (add-hook 'text-mode-hook 'visual-line-mode)
+(add-hook 'text-mode-hook 'visual-line-mode)
 #+end_src
 
 Follow symlink
 #+BEGIN_SRC emacs-lisp
-  (setq vc-follow-symlinks t)
+(setq vc-follow-symlinks t)
 #+END_SRC
 
 Group under a wheel minor mode
 #+BEGIN_SRC emacs-lisp
-  (crafted-package-install-package 'minions)
-  (add-hook 'after-init-hook 'minions-mode)
+(crafted-package-install-package 'minions)
+(add-hook 'after-init-hook 'minions-mode)
 #+END_SRC
 
 Modeline adjustment
@@ -274,9 +273,9 @@ Modeline adjustment
 (setq doom-modeline-height 10) ; optional
 (setq doom-modeline-bar-width 4)
 (custom-set-faces
-  '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
-  '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
-  '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
+ '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
+ '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
+ '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
 #+END_SRC
 
 Line-number
@@ -302,17 +301,17 @@ Pdf support
 #+END_SRC
 ** Mixed mode
 #+BEGIN_SRC emacs-lisp 
-  (crafted-package-install-package 'mixed-pitch)
-  (add-hook 'text-mode-hook 'mixed-pitch-mode)
+(crafted-package-install-package 'mixed-pitch)
+(add-hook 'text-mode-hook 'mixed-pitch-mode)
 #+END_SRC
 ** CSV mode
 #+BEGIN_SRC emacs-lisp 
-  (crafted-package-install-package 'csv-mode)
+(crafted-package-install-package 'csv-mode)
 #+END_SRC
 
 Don't ask for evaluation when using babel
 #+BEGIN_SRC emacs-lisp
-  (setq org-confirm-babel-evaluate nil)
+(setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
 natural tab in src block
@@ -346,75 +345,75 @@ Start in dark mode
 ** k8x1d-org
 Packages
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
-  (require 'crafted-org)
-  (crafted-package-install-package 'org-superstar) ;; bullets customization
-  (crafted-package-install-package 'evil-org) ;; evil support for org-agenda
-  (crafted-package-install-package 'toc-org) ;; Table of content management
+(require 'crafted-org)
+(crafted-package-install-package 'org-superstar) ;; bullets customization
+(crafted-package-install-package 'evil-org) ;; evil support for org-agenda
+(crafted-package-install-package 'toc-org) ;; Table of content management
 #+END_SRC
 
 Configurations
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
-  (setq org-superstar-remove-leading-stars t)
-  (setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
-  (setq org-superstar-special-todo-items t)
+(setq org-superstar-remove-leading-stars t)
+(setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
+(setq org-superstar-special-todo-items t)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
-  (setq org-startup-indented t
-        org-pretty-entities t
-        org-hide-emphasis-markers t
-        org-startup-with-inline-images t
-        org-image-actual-width '(600))
+(setq org-startup-indented t
+      org-pretty-entities t
+      org-hide-emphasis-markers t
+      org-startup-with-inline-images t
+      org-image-actual-width '(600))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
-  (global-set-key (kbd "C-c o a a") 'org-agenda)
-  (global-set-key (kbd "C-c o a l") 'org-agenda-list)
-  (global-set-key (kbd "C-c o a t") 'org-todo-list)
-  (setq org-directory "~/org")
-  (setq org-agenda-include-all-todo nil)
-  (setq org-agenda-skip-scheduled-if-done t)
-  (setq org-agenda-skip-deadline-if-done t)
-  (setq org-agenda-include-diary t)
-  (setq org-agenda-columns-add-appointments-to-effort-sum t)
-  (setq org-agenda-custom-commands nil)
-  (setq org-agenda-default-appointment-duration 60)
-  (setq org-agenda-mouse-1-follows-link t)
-  (setq org-agenda-skip-unavailable-files t)
-  (setq org-agenda-use-time-grid nil)
-  (setq org-agenda-files (list org-directory))
-  (setq org-default-notes-file (concat org-directory "/todo.org"))
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
-  (setq org-refile-use-outline-path 'file)
-  (setq org-outline-path-complete-in-steps nil)
+(global-set-key (kbd "C-c o a a") 'org-agenda)
+(global-set-key (kbd "C-c o a l") 'org-agenda-list)
+(global-set-key (kbd "C-c o a t") 'org-todo-list)
+(setq org-directory "~/org")
+(setq org-agenda-include-all-todo nil)
+(setq org-agenda-skip-scheduled-if-done t)
+(setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-include-diary t)
+(setq org-agenda-columns-add-appointments-to-effort-sum t)
+(setq org-agenda-custom-commands nil)
+(setq org-agenda-default-appointment-duration 60)
+(setq org-agenda-mouse-1-follows-link t)
+(setq org-agenda-skip-unavailable-files t)
+(setq org-agenda-use-time-grid nil)
+(setq org-agenda-files (list org-directory))
+(setq org-default-notes-file (concat org-directory "/todo.org"))
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
 #+END_SRC
 
 Hooks
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
-  (add-hook 'org-mode-hook 'org-superstar-mode)
-  (add-hook 'org-mode-hook (lambda ()
-                             (require 'evil-org)
-                             (evil-org-set-key-theme '(navigation insert textobjects additional calendar))))
-  (add-hook 'org-agenda-mode-hook (lambda ()
-                                    (require 'evil-org-agenda)
-                                    (evil-org-agenda-set-keys)))
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'org-mode-hook 'toc-org-mode)
+(add-hook 'org-mode-hook 'org-superstar-mode)
+(add-hook 'org-mode-hook (lambda ()
+                           (require 'evil-org)
+                           (evil-org-set-key-theme '(navigation insert textobjects additional calendar))))
+(add-hook 'org-agenda-mode-hook (lambda ()
+                                  (require 'evil-org-agenda)
+                                  (evil-org-agenda-set-keys)))
+(add-hook 'org-mode-hook 'evil-org-mode)
+(add-hook 'org-mode-hook 'toc-org-mode)
 #+END_SRC
 
 ** k8x1d-python
 Packages
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
-  (require 'crafted-python)
+(require 'crafted-python)
 #+END_SRC
 
 Configurations
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
-  (setq python-shell-interpreter (concat (getenv "HOME") "/.guix-extra-profiles/code/code/bin/python3.9"))
-  (setq org-babel-python-command (concat (getenv "HOME") "/.guix-extra-profiles/code/code/bin/python3.9"))
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)))
+(setq python-shell-interpreter (concat (getenv "HOME") "/.guix-extra-profiles/code/code/bin/python3.9"))
+(setq org-babel-python-command (concat (getenv "HOME") "/.guix-extra-profiles/code/code/bin/python3.9"))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)))
 #+END_SRC
 
 ** k8x1d-julia
@@ -461,9 +460,9 @@ Packages
 
 Hooks
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
-  (add-hook 'magit-mode-hook (lambda ()
-                               (magit-todos-mode)
-                               (require 'forge)))
+(add-hook 'magit-mode-hook (lambda ()
+                             (magit-todos-mode)
+                             (require 'forge)))
 #+END_SRC
 
 ** k8x1d-ivy
@@ -531,7 +530,6 @@ Hooks
   (require 'eglot-ltex)
   (call-interactively #'eglot))
 #+END_SRC
-
 
 * Files footers
 #+html: <details><summary>config.el</summary>
