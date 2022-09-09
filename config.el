@@ -10,7 +10,7 @@
   (require 'crafted-project)     ; built-in alternative to projectile
   (require 'crafted-speedbar)    ; built-in file-tree
   (require 'crafted-screencast)  ; show current command and binding in modeline
-  (require 'crafted-pdf-reader)  ; pdf support
+  ;;(require 'crafted-pdf-reader)  ; pdf support
   (require 'crafted-latex)       ; latex support
   (require 'crafted-lisp)        ; lisp support
   ;;(require 'crafted-python)      ; python support
@@ -23,6 +23,7 @@
   (require 'k8x1d-julia)         ; julia support
   (require 'k8x1d-R)             ; R support
   (require 'k8x1d-git)           ; git support
+  (require 'k8x1d-ivy)           ; ivy completion support
 
 (add-hook 'emacs-startup-hook
           (lambda ()
@@ -81,7 +82,7 @@
    version-control t)       ; use versioned backups
 
 (setq auto-save-file-name-transforms
-  `((".*" "~/.cache/emacs/saves/" t))))
+  `((".*" "~/.cache/emacs/saves/" t)))
 
 (setq julia-vterm-repl-program (concat (getenv "HOME") "/.nix-profile/bin/julia -t 4"))
 (setq eglot-jl-default-environment "~/.julia/environments/v1.7")
@@ -113,7 +114,6 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-(add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
 
 (crafted-package-install-package 'vterm)
 (global-set-key (kbd "C-c t") 'vterm-other-window)
@@ -133,6 +133,12 @@
 (setq org-src-tab-acts-natively t)
 
 (setq org-src-preserve-indentation t)
+
+(crafted-package-install-package 'pdf-tools)
+
+(pdf-loader-install)
+
+(add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
 
 (provide 'config)
 ;;; config.el ends here
