@@ -520,7 +520,7 @@ Configuration
 
 Hooks
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-language-tool.el 
-(add-hook 'LaTeX-mode-hook
+(add-hook 'text-mode-hook
           (lambda ()
             (require 'eglot-ltex)
             (call-interactively #'eglot)))

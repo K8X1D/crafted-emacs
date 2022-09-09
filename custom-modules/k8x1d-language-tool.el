@@ -9,7 +9,7 @@
 
 (setq eglot-languagetool-server-path "~/Documents/Logiciels/editors_set-up/ltex-ls-15.2.0")
 
-(add-hook 'LaTeX-mode-hook
+(add-hook 'text-mode-hook
           (lambda ()
             (require 'eglot-ltex)
             (call-interactively #'eglot)))
