@@ -10,11 +10,11 @@
 (require 'crafted-project)     ; built-in alternative to projectile
 (require 'crafted-speedbar)    ; built-in file-tree
 (require 'crafted-screencast)  ; show current command and binding in modeline
-;;(require 'crafted-pdf-reader)  ; pdf support
+;;(require 'crafted-pdf-reader)  ; pdf support; FIXME: repair bug
 (require 'crafted-latex)       ; latex support
 (require 'crafted-lisp)        ; lisp support
 ;;(require 'crafted-python)      ; python support
-;;(require 'crafted-compile)     ; automatically compile some emacs lisp files  TODO: repair bug
+;;(require 'crafted-compile)     ; automatically compile some emacs lisp files;  FIXME: repair bug
 
 (require 'k8x1d-org)           ; org-appear, clickable hyperlinks etc.
 
@@ -29,10 +29,10 @@
 (add-hook 'emacs-startup-hook
           (lambda ()
             (custom-set-faces
-             `(default ((t (:font "DejaVu Sans Mono 16"))))
+             `(default ((t (:font "Fira Code 16"))))
              `(fixed-pitch ((t (:inherit (default)))))
              `(fixed-pitch-serif ((t (:inherit (default)))))
-             `(variable-pitch ((t (:font "DejaVu Sans 16")))))))
+             `(variable-pitch ((t (:font "Fira Sans 16")))))))
 
 (setq inhibit-x-resources t) ;; ignore xressources
 (crafted-package-install-package 'doom-themes)

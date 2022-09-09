@@ -106,7 +106,7 @@ Remove gui elements
 #+END_SRC
 
 Use straight.el instead of package.el
-#+BEGIN_SRC emacs-lisp :tangle ./early-config.el
+#+BEGIN_SRC emacs-lisp :tangle early-config.el
 (setq package-enable-at-startup nil)
 (setq crafted-package-system 'straight)
 (crafted-package-bootstrap crafted-package-system)
@@ -156,10 +156,10 @@ Variable pitch
 (add-hook 'emacs-startup-hook
           (lambda ()
             (custom-set-faces
-             `(default ((t (:font "DejaVu Sans Mono 16"))))
+             `(default ((t (:font "Fira Code 16"))))
              `(fixed-pitch ((t (:inherit (default)))))
              `(fixed-pitch-serif ((t (:inherit (default)))))
-             `(variable-pitch ((t (:font "DejaVu Sans 16")))))))
+             `(variable-pitch ((t (:font "Fira Sans 16")))))))
 #+END_SRC
 
 Theme
