@@ -31,7 +31,7 @@
 
 #+html: <details><summary>k8x1d-python.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
-;;; k8x1d-python.el -- Org customizations -*- lexical-binding: t; -*-
+;;; k8x1d-python.el -- Python support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
@@ -42,7 +42,7 @@
 
 #+html: <details><summary>k8x1d-julia.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-julia.el 
-;;; k8x1d-julia.el -- Org customizations -*- lexical-binding: t; -*-
+;;; k8x1d-julia.el -- Julia support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
@@ -53,7 +53,7 @@
 
 #+html: <details><summary>k8x1d-R.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-R.el 
-;;; k8x1d-R.el -- Org customizations -*- lexical-binding: t; -*-
+;;; k8x1d-R.el -- R support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
@@ -64,7 +64,7 @@
 
 #+html: <details><summary>k8x1d-git.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
-;;; k8x1d-git.el -- Org customizations -*- lexical-binding: t; -*-
+;;; k8x1d-git.el -- Git support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
@@ -75,7 +75,7 @@
 
 #+html: <details><summary>k8x1d-ivy.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-ivy.el 
-;;; k8x1d-ivy.el -- Ivy completion -*- lexical-binding: t; -*-
+;;; k8x1d-ivy.el -- Ivy support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
@@ -86,7 +86,7 @@
 
 #+html: <details><summary>k8x1d-language-tool.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-language-tool.el 
-;;; k8x1d-language-tool.el -- Ivy completion -*- lexical-binding: t; -*-
+;;; k8x1d-language-tool.el -- LanguageTools support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
