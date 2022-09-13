@@ -29,10 +29,11 @@
 (add-hook 'emacs-startup-hook
           (lambda ()
             (custom-set-faces
-             `(default ((t (:font "Fira Code 16"))))
+             `(default ((t (:font "JuliaMono 16"))))
+             ;;`(default ((t (:font "FreeMono Bold 16"))))
              `(fixed-pitch ((t (:inherit (default)))))
              `(fixed-pitch-serif ((t (:inherit (default)))))
-             `(variable-pitch ((t (:font "Fira Sans 16")))))))
+             `(variable-pitch ((t (:font "FreeSans 16")))))))
 
 (setq inhibit-x-resources t) ;; ignore xressources
 (crafted-package-install-package 'doom-themes)
@@ -104,15 +105,22 @@
 (add-hook 'after-init-hook 'minions-mode)
 
 (setq doom-modeline-height 10) ; optional
-(setq doom-modeline-bar-width 4)
-(custom-set-faces
- '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
- '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
- '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
+;;(setq doom-modeline-bar-width 4)
+;;(custom-set-faces
+;; '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
+;; '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
+;; '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+
+(define-key flymake-mode-map (kbd "C-c f n") 'flymake-goto-next-error)
+(define-key flymake-mode-map (kbd "C-c f p") 'flymake-goto-prev-error)
+(add-hook 'flymake-mode-hook
+  (lambda ()
+   (local-set-key (kbd "C-c f b") 'flymake-show-buffer-diagnostics)
+   (local-set-key (kbd "C-c f d") 'flymake-show-project-diagnostics)))
 
 (crafted-package-install-package 'vterm)
 (global-set-key (kbd "C-c t") 'vterm-other-window)

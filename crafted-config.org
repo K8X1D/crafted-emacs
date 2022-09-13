@@ -156,10 +156,11 @@ Variable pitch
 (add-hook 'emacs-startup-hook
           (lambda ()
             (custom-set-faces
-             `(default ((t (:font "Fira Code 16"))))
+             `(default ((t (:font "JuliaMono 16"))))
+             ;;`(default ((t (:font "FreeMono Bold 16"))))
              `(fixed-pitch ((t (:inherit (default)))))
              `(fixed-pitch-serif ((t (:inherit (default)))))
-             `(variable-pitch ((t (:font "Fira Sans 16")))))))
+             `(variable-pitch ((t (:font "FreeSans 16")))))))
 #+END_SRC
 
 Theme
@@ -271,11 +272,11 @@ Group under a wheel minor mode
 Modeline adjustment
 #+BEGIN_SRC emacs-lisp
 (setq doom-modeline-height 10) ; optional
-(setq doom-modeline-bar-width 4)
-(custom-set-faces
- '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
- '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
- '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
+;;(setq doom-modeline-bar-width 4)
+;;(custom-set-faces
+;; '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
+;; '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
+;; '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
 #+END_SRC
 
 Line-number
@@ -286,6 +287,17 @@ Line-number
 Pdf support
 #+BEGIN_SRC emacs-lisp
 (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+#+END_SRC
+
+Flymake
+#+BEGIN_SRC emacs-lisp
+(define-key flymake-mode-map (kbd "C-c f n") 'flymake-goto-next-error)
+(define-key flymake-mode-map (kbd "C-c f p") 'flymake-goto-prev-error)
+(add-hook 'flymake-mode-hook
+  (lambda ()
+   (local-set-key (kbd "C-c f b") 'flymake-show-buffer-diagnostics)
+   (local-set-key (kbd "C-c f d") 'flymake-show-project-diagnostics)))
+
 #+END_SRC
 
 * Additional packages
@@ -323,7 +335,6 @@ Do not remove initial white space on export
 #+BEGIN_SRC emacs-lisp
 (setq org-src-preserve-indentation t)
 #+END_SRC
-
 
 ** Pdf-tools
 Install package
@@ -367,9 +378,6 @@ Configurations
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-org.el 
-(global-set-key (kbd "C-c o a a") 'org-agenda)
-(global-set-key (kbd "C-c o a l") 'org-agenda-list)
-(global-set-key (kbd "C-c o a t") 'org-todo-list)
 (setq org-directory "~/org")
 (setq org-agenda-include-all-todo nil)
 (setq org-agenda-skip-scheduled-if-done t)
@@ -382,7 +390,21 @@ Configurations
 (setq org-agenda-skip-unavailable-files t)
 (setq org-agenda-use-time-grid nil)
 (setq org-agenda-files (list org-directory))
-(setq org-default-notes-file (concat org-directory "/todo.org"))
+;; Org capture
+(global-set-key (kbd "C-c l") #'org-store-link)
+;;(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
+(global-set-key (kbd "C-c a a") 'org-agenda)
+(global-set-key (kbd "C-c a l") 'org-agenda-list)
+(global-set-key (kbd "C-c a t") 'org-todo-list)
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-capture-templates
+      '(("t" "Today" entry (file+headline "~/org/today.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("p" "Project" entry (file+datetree "~/org/projects.org")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/org/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
@@ -520,7 +542,7 @@ Configuration
 
 Hooks
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-language-tool.el 
-(add-hook 'text-mode-hook
+(add-hook 'LaTeX-mode-hook
           (lambda ()
             (require 'eglot-ltex)
             (call-interactively #'eglot)))
