@@ -29,6 +29,7 @@
 #+END_SRC
 #+html: </details>
 
+#+html: <details><summary>k8x1d-python.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-python.el 
 ;;; k8x1d-python.el -- Org customizations -*- lexical-binding: t; -*-
 
@@ -61,7 +62,7 @@
 #+END_SRC
 #+html: </details>
 
-#+html: <details><summary>k8x1d-R.el</summary>
+#+html: <details><summary>k8x1d-git.el</summary>
 #+BEGIN_SRC emacs-lisp :tangle custom-modules/k8x1d-git.el 
 ;;; k8x1d-git.el -- Org customizations -*- lexical-binding: t; -*-
 
