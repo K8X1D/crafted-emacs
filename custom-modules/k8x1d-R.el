@@ -1,4 +1,4 @@
-;;; k8x1d-R.el -- Org customizations -*- lexical-binding: t; -*-
+;;; k8x1d-R.el -- R support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 

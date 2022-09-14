@@ -1,4 +1,4 @@
-;;; k8x1d-language-tool.el -- Ivy completion -*- lexical-binding: t; -*-
+;;; k8x1d-language-tool.el -- LanguageTools support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 

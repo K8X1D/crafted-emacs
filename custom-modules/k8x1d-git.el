@@ -1,4 +1,4 @@
-;;; k8x1d-git.el -- Org customizations -*- lexical-binding: t; -*-
+;;; k8x1d-git.el -- Git support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 

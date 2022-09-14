@@ -62,8 +62,8 @@
 (when (featurep 'pgtk)
   (if (version< emacs-version "29")
       ;; initial transparency
-      (set-frame-parameter nil 'alpha-background 100)
-    (add-to-list 'default-frame-alist '(alpha-background . 100))
+      (set-frame-parameter nil 'alpha-background 80)
+    (add-to-list 'default-frame-alist '(alpha-background . 80))
 
     ;; function to change transparency
     (defun kk/transparency (value)
@@ -104,12 +104,11 @@
 (crafted-package-install-package 'minions)
 (add-hook 'after-init-hook 'minions-mode)
 
-(setq doom-modeline-height 10) ; optional
-;;(setq doom-modeline-bar-width 4)
-;;(custom-set-faces
-;; '(mode-line ((t (:family "DejaVu Sans Mono" :height 0.8))))
-;; '(mode-line-active ((t (:family "DejaVu Sans Mono" :height 0.8)))) ; For 29+
-;; '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height 0.8)))))
+;;(setq doom-modeline-height 10) ; optional
+(custom-set-faces
+  '(mode-line ((t (:family "FreeSans" :height 150))))
+  '(mode-line-active ((t (:family "FreeSans" :height 150)))) ; For 29+
+  '(mode-line-inactive ((t (:family "FreeSans" :height 150)))))
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 

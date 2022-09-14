@@ -1,4 +1,4 @@
-;;; k8x1d-julia.el -- Org customizations -*- lexical-binding: t; -*-
+;;; k8x1d-julia.el -- Julia support -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Kevin Kaiser
 
