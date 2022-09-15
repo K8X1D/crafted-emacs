@@ -105,10 +105,10 @@
 (add-hook 'after-init-hook 'minions-mode)
 
 ;;(setq doom-modeline-height 10) ; optional
-(custom-set-faces
-  '(mode-line ((t (:family "FreeSans" :height 150))))
-  '(mode-line-active ((t (:family "FreeSans" :height 150)))) ; For 29+
-  '(mode-line-inactive ((t (:family "FreeSans" :height 150)))))
+;;(custom-set-faces
+;;  '(mode-line ((t (:family "FreeSans" :height 120))))
+;;  '(mode-line-active ((t (:family "FreeSans" :height 120)))) ; For 29+
+;;  '(mode-line-inactive ((t (:family "FreeSans" :height 120)))))
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
